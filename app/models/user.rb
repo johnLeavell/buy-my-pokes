@@ -7,5 +7,13 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end        
-        
+  
+  def to_s
+    email
+  end
+
+  after_create do
+    customer = Stripe::Customer.create(email: email)
+    update(stripe_customer_id: customer.id)
+  end
 end
