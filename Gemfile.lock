@@ -87,6 +87,8 @@ GEM
       rouge (>= 1.0.0)
     bigdecimal (3.1.4)
     bindex (0.8.1)
+    binding_of_caller (1.0.0)
+      debug_inspector (>= 0.0.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -106,6 +108,7 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    debug_inspector (1.1.0)
     devise (4.9.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -145,6 +148,15 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.20.0)
+    monetize (1.12.0)
+      money (~> 6.12)
+    money (6.16.0)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.15.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9)
+      money (~> 6.13)
+      railties (>= 3.0)
     msgpack (1.7.2)
     mutex_m (0.1.2)
     net-imap (0.4.2)
@@ -269,6 +281,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   better_errors
+  binding_of_caller
   bootsnap
   capybara
   debug
@@ -276,6 +289,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.8, >= 2.8.1)
   importmap-rails
   jbuilder
+  money-rails
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.1)

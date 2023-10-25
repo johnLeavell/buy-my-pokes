@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   root to: "products#index"
-  
+
   devise_for :users
 
+  resources :products
+
+  post 'checkout/create', to: 'checkouts#create'
+  get 'checkout/success', to: 'checkouts#success'
+  get 'checkout/cancel', to: 'checkouts#cancel'
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
