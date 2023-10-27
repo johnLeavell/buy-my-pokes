@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
     before_action :set_product, only: %i[ show update destroy ]
 
     def index
-        @products = Product.all
+        @products = Stripe::Product.list({limit: 20})
     end
 
     def show
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
 
     def create
         @product = Product.new(product_params)
-        if @product.save
+        if @stripe_product.save
             redirect_to @product, notice: "Product was successfully created."
         else
             render :new, status: :unprocessable_entity
@@ -42,6 +42,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-        params.require(:product).permit(:name, :price, :currency, :stripe_price_id)
+        params.require(:product).permit(:name, :price, :currency, :stripe_product_id, :stripe_price_id)
     end
 end
