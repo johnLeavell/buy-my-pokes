@@ -10,15 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_24_155413) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_25_171307) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
-
-  create_table "checkouts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -40,9 +35,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_24_155413) do
     t.citext "username"
     t.citext "first_name"
     t.citext "last_name"
-    t.integer "stripe_customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
