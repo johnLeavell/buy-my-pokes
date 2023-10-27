@@ -43,6 +43,7 @@ gem "binding_of_caller"
 
 gem 'money-rails'
 
+gem 'byebug'
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
