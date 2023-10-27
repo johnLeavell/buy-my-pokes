@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   resources :products
 
+  namespace :webhooks do
+    post 'stripe', to: 'stripe#create'
+  end
+
 resources :checkout do 
   collection do
     post "create"
