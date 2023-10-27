@@ -2,19 +2,25 @@
   <div class="container">
     <%= link_to 'Poke Shop', root_path, class: 'navbar-brand link-light text-white' %>
 
-    <div class="navigation">
+    <ul class="navbar-nav">
       <% if user_signed_in? %>
-        <nav>
-          <%= link_to "Welcome #{current_user.full_name}", user_session, class: 'link-light text-white' %> |
-          <%= link_to 'Edit profile', edit_user_registration_path, class: 'link-light text-white' %> |
-          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'link-light text-white', data: { turbo_method: 'delete' } %>
-        </nav>
+        <li class="nav-item">
+          <%= link_to "Welcome #{current_user.full_name}", user_session, class: 'nav-link link-light text-white' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Edit profile', edit_user_registration_path, class: 'nav-link link-light text-white' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link link-light text-white', data: { turbo_method: 'delete' } %>
+        </li>
       <% else %>
-        <nav>
-          <%= link_to 'Sign in', new_user_session_path, class: 'link-light text-white' %> |
-          <%= link_to 'Sign up', new_user_registration_path, class: 'link-light text-white' %>
-        </nav>
+        <li class="nav-item">
+          <%= link_to 'Sign in', new_user_session_path, class: 'nav-link link-light text-white' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link link-light text-white' %>
+        </li>
       <% end %>
-    </div>
+    </ul>
   </div> <!-- .container -->
 </nav>
