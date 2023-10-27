@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id                :bigint           not null, primary key
+#  currency          :string           default("usd")
+#  name              :string
+#  price             :integer
+#  sales_count       :integer          default(0), not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  stripe_price_id   :string
+#  stripe_product_id :string
+#
 class Product < ApplicationRecord
     validates :name, presence: true
     validates :price, numericality: { greater_than: 0, less_than: 1000000 }
@@ -7,11 +21,4 @@ class Product < ApplicationRecord
     end
     
     monetize :price, as: :price_cents
-
-    after_create do 
-        product = Stripe::Product.create(name: name)    
-        price = Stripe::Price.create(product: product, unit_amount: self.price, currency: self.currency)  
-        update(stripe_product_id: product.id, stripe_price_id: price.id)
-    end
-
 end
