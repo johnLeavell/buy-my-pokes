@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: "products#index"
-
+  root to: "home#index"
+  # root to: "products#index"
   devise_for :users
 
   resources :products
@@ -16,6 +16,9 @@ resources :checkout do
     get "cancel"
   end
 end
+post "products/add_to_cart/:id", to: "products#add_to_cart", as: :add_to_cart
+get "/about", to: "home#about", as: :about
+
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

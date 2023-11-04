@@ -4,4 +4,8 @@ class HomeController < ApplicationController
             redirect_to products_path
         end
     end
+
+    def about
+    end
+    
 end
