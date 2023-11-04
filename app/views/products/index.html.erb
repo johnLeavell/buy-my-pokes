@@ -22,7 +22,12 @@
             <small class="text">
               <%= form_tag("/checkout/create", remote: true, data: { turbo: false }, method: "POST") do %>
                 <input type="hidden" name="price" value="<%= product.default_price %>" />
-                <%= button_tag "Purchase", type: "submit", id: "checkout-button", data: { turbo: false }, class: "btn btn-primary" %>
+                <%= button_tag "Purchase", class: "mb-3", type: "submit", id: "checkout-button", data: { turbo: false }, class: "btn btn-primary" %>
+              <% end %>
+
+              <%= form_tag("/add_to_cart", remote: true, data: { turbo: false}, method: "POST") do %>
+                <input type="hidden" name="price" value="<%= product.default_price %>" />
+                <%= button_tag "Add to cart", type: "submit", id: "cartt-button", data: { turbo: false }, class: "btn btn-primary" %>
               <% end %>
             </small>
           </p>
@@ -31,4 +36,3 @@
     </div>
   </div>
 <% end %>
-

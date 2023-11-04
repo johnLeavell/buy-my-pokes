@@ -22,6 +22,13 @@ class ProductsController < ApplicationController
         end
     end
 
+    def add_to_cart
+        id = params[:id].to_i
+        session[:cart].push(id) unless session[:cart].include?(id)
+        
+        redirect_to products_path, notice: "Product was successfully added to cart."
+    end
+
     def update
         if @product.update(product_params)
             redirect_to @product, notice: "Product was successfully updated."

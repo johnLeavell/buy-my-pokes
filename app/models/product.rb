@@ -20,5 +20,5 @@ class Product < ApplicationRecord
         name
     end
     
-    monetize :price, as: :price_cents
+        monetize :price, as: :price_cents
 end
