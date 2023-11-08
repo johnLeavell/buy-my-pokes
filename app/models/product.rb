@@ -21,4 +21,9 @@ class Product < ApplicationRecord
     end
     
     monetize :price, as: :price_cents
+
+    # i need to make a shopping cart that will add the items to the cart and then checkout,
+    # i need to make a checkout page that will show the items in the cart and then allow the user to checkout
+    # i need to make a checkout page that will allow the user to checkout and then pay for the items
+
 end

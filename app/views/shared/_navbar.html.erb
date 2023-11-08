@@ -1,11 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark mb-4 text-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
   <div class="container">
-    <%= link_to 'Poke Shop', root_path, class: 'navbar-brand link-light text-white' %>
-
     <ul class="navbar-nav">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "Welcome #{current_user.full_name}", user_session, class: 'nav-link link-light text-white' %>
+          <%= link_to "Welcome #{current_user.full_name}", products_path, class: 'nav-link link-light text-white' %>
         </li>
         <li class="nav-item">
           <%= link_to 'Edit profile', edit_user_registration_path, class: 'nav-link link-light text-white' %>
@@ -15,12 +13,17 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to 'Sign in', new_user_session_path, class: 'nav-link link-light text-white' %>
+          <%= link_to 'Home', root_path, class: 'nav-link link-light text-white' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link link-light text-white' %>
+          <%= link_to 'About us', about_path, class: 'nav-link link-light text-white' %>
         </li>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <%= link_to "Sign in", new_user_session_path, class: "btn btn-light btn-lg px-4 gap-3 text-warning", role: "button" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light btn-lg px-4 gap-3 text-warning" %>
+        </div>
       <% end %>
     </ul>
   </div> <!-- .container -->
 </nav>
+
