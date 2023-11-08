@@ -22,14 +22,6 @@
           <%= link_to "Sign in", new_user_session_path, class: "btn btn-light btn-lg px-4 gap-3 text-warning", role: "button" %>
           <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light btn-lg px-4 gap-3 text-warning" %>
         </div>
-        <% if @cart.present? %>
-          <% @cart.each do |product| %>
-            <%= product.name %>
-            <br>
-          <% end %>
-          <%= @cart.collect { |item| item.to_builder.attributes! } %>
-          <%= button_to "Buy now!", checkout_create_path, remote: true, data: { disable_with: "validating..." } %>
-        <% end %>
       <% end %>
     </ul>
   </div> <!-- .container -->

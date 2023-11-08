@@ -16,7 +16,9 @@ resources :checkout do
     get "cancel"
   end
 end
+
 post "products/add_to_cart/:id", to: "products#add_to_cart", as: :add_to_cart
+
 get "/about", to: "home#about", as: :about
 
   
