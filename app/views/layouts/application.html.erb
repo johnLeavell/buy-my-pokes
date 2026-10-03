@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BuyMyPokemon</title>
+    <title><%= page_title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= page_description %>">
+    <link rel="canonical" href="<%= request.original_url.split('?').first %>">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= page_title %>">
+    <meta property="og:description" content="<%= page_description %>">
+    <meta property="og:image" content="<%= social_preview_image_url %>">
+    <meta property="og:url" content="<%= request.original_url.split('?').first %>">
+    <meta property="og:site_name" content="Buy My Pokes">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= page_title %>">
+    <meta name="twitter:description" content="<%= page_description %>">
+    <meta name="twitter:image" content="<%= social_preview_image_url %>">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= render 'shared/cdn_assets' %>
+    <%= render 'shared/analytics' %>
   </head>
 
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flash_messages' %>
     <%= yield %>
+    <%= render 'shared/footer' %>
+    <%= render 'shared/cookie_consent' %>
   </body>
 </html>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "home#index"
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :products do
     member do
@@ -27,6 +27,11 @@ Rails.application.routes.draw do
   end
 
   get "/about", to: "home#about", as: :about
+  get "/privacy", to: "home#privacy", as: :privacy
+  get "/terms", to: "home#terms", as: :terms
+
+  get "/robots.txt", to: "sitemaps#robots"
+  get "/sitemap.xml", to: "sitemaps#sitemap"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

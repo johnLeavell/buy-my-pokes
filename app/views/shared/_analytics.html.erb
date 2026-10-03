@@ -1,0 +1,12 @@
+<%# Analytics is off by default. To enable Google Analytics (GA4), set the
+    GA_MEASUREMENT_ID environment variable to your Measurement ID (G-XXXXXXX).
+    See README.md for details. %>
+<% if ENV["GA_MEASUREMENT_ID"].present? %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV["GA_MEASUREMENT_ID"] %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<%= ENV["GA_MEASUREMENT_ID"] %>');
+  </script>
+<% end %>
