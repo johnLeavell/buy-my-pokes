@@ -1,38 +1,29 @@
-<h1>Products</h1>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Products</h1>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to "New Product", new_product_path, class: "btn btn-outline-primary" %>
+    <% end %>
+  </div>
 
-<% @products.each do |product| %>
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <% if product["images"].present? %>
-          <%= image_tag product["images"].first, alt: "Product Image", class: "img-fluid rounded start" %>
-        <% else %>
-          <%= image_tag "https://via.placeholder.com/150", alt: "Product Image" %>
-        <% end %>
-      </div>
+  <% if @products.empty? %>
+    <p>No cards for sale yet. Check back soon!</p>
+  <% end %>
 
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><%= product["name"] %></h5>
-          <% price = Stripe::Price.retrieve(product["default_price"]) %>
-          <p class="card-text">
-            <%= (price["unit_amount"] / 100).to_s + " " + price["currency"].upcase %>
-          </p>
-          <p class="card-text">
-            <small class="text">
-              <%= form_tag("/checkout/create", remote: true, data: { turbo: false }, method: "POST") do %>
-                <input type="hidden" name="price" value="<%= product.default_price %>" />
-                <%= button_tag "Purchase", class: "mb-3", type: "submit", id: "checkout-button", data: { turbo: false }, class: "btn btn-primary" %>
-              <% end %>
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title"><%= link_to product.name, product %></h5>
+            <p class="card-text fw-bold"><%= product.price_cents.format %></p>
 
-              <%= form_tag("/add_to_cart", remote: true, data: { turbo: false}, method: "POST") do %>
-                <input type="hidden" name="price" value="<%= product.default_price %>" />
-                <%= button_tag "Add to cart", type: "submit", id: "cartt-button", data: { turbo: false }, class: "btn btn-primary" %>
-              <% end %>
-            </small>
-          </p>
+            <div class="mt-auto d-grid gap-2">
+              <%= button_to "Add to cart", add_to_cart_product_path(product), method: :post, class: "btn btn-primary" %>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
-<% end %>
+</div>

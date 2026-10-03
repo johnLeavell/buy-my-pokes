@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE), not null
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :citext
@@ -24,7 +25,16 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "full_name combines first and last name" do
+    user = users(:shopper)
+    assert_equal "Sam Shopper", user.full_name
+  end
+
+  test "regular users are not admin" do
+    assert_not users(:shopper).admin?
+  end
+
+  test "admin users report admin?" do
+    assert users(:store_admin).admin?
+  end
 end

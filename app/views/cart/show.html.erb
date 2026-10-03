@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h1>Your Cart</h1>
+
+  <% if @cart_items.empty? %>
+    <p>Your cart is empty. <%= link_to "Browse products", products_path %>.</p>
+  <% else %>
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |item| %>
+          <% product = item[:product] %>
+          <tr>
+            <td><%= link_to product.name, product %></td>
+            <td><%= product.price_cents.format %></td>
+            <td><%= item[:quantity] %></td>
+            <td><%= Money.new(product.price * item[:quantity], product.currency).format %></td>
+            <td>
+              <%= button_to "Remove", remove_item_cart_path(product_id: product.id), method: :delete, class: "btn btn-sm btn-outline-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h4>Total: <%= Money.new(@cart_total_cents, @cart_items.first[:product].currency).format %></h4>
+
+      <% if user_signed_in? %>
+        <%= button_to "Checkout", checkout_index_path, method: :post, class: "btn btn-primary btn-lg" %>
+      <% else %>
+        <%= link_to "Sign in to checkout", new_user_session_path, class: "btn btn-primary btn-lg" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

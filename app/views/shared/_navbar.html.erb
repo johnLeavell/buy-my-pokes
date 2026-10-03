@@ -6,6 +6,12 @@
           <%= link_to "Welcome #{current_user.full_name}", products_path, class: 'nav-link link-light text-white' %>
         </li>
         <li class="nav-item">
+          <%= link_to "Cart (#{@cart_items&.sum { |i| i[:quantity] } || 0})", cart_path, class: 'nav-link link-light text-white' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'My Orders', orders_path, class: 'nav-link link-light text-white' %>
+        </li>
+        <li class="nav-item">
           <%= link_to 'Edit profile', edit_user_registration_path, class: 'nav-link link-light text-white' %>
         </li>
         <li class="nav-item">

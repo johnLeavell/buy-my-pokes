@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h1>Order #<%= @order.id %></h1>
+
+  <p>
+    Placed <%= @order.created_at.strftime("%b %d, %Y") %> &middot;
+    Status: <%= @order.status.titleize %>
+  </p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.unit_price.format %></td>
+          <td><%= item.quantity %></td>
+          <td><%= Money.new(item.subtotal_cents, @order.currency).format %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h4>Total: <%= @order.total.format %></h4>
+
+  <%= link_to "Back to orders", orders_path %>
+</div>
