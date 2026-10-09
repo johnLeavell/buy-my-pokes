@@ -1,12 +1,12 @@
 class ProductsController < ApplicationController
-    before_action :set_product, only: %i[ show update destroy ]
+    before_action :set_product, only: %i[ show edit update destroy ]
+    before_action :require_admin!, only: %i[ new create edit update destroy ]
 
     def index
-        @products = Stripe::Product.list({limit: 20})
+        @products = Product.order(created_at: :desc)
     end
 
     def show
-
     end
 
     def new
@@ -15,18 +15,25 @@ class ProductsController < ApplicationController
 
     def create
         @product = Product.new(product_params)
-        if @stripe_product.save
+        if @product.save
             redirect_to @product, notice: "Product was successfully created."
         else
             render :new, status: :unprocessable_entity
         end
     end
 
+    def edit
+    end
+
     def add_to_cart
-        id = params[:id].to_i
-        session[:cart].push(id) unless session[:cart].include?(id)
-        
-        redirect_to products_path, notice: "Product was successfully added to cart."
+        product = Product.find_by(id: params[:id])
+
+        if product
+            session[:cart][product.id.to_s] = session[:cart].fetch(product.id.to_s, 0) + 1
+            redirect_to products_path, notice: "#{product.name} was added to your cart."
+        else
+            redirect_to products_path, alert: "That product could not be found."
+        end
     end
 
     def update
@@ -49,6 +56,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-        params.require(:product).permit(:name, :price, :currency, :stripe_product_id, :stripe_price_id)
+        params.require(:product).permit(:name, :price, :currency)
     end
 end

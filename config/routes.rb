@@ -1,33 +1,39 @@
 Rails.application.routes.draw do
   root to: "home#index"
-  # root to: "products#index"
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
-  resources :products
+  resources :products do
+    member do
+      post "add_to_cart"
+    end
+  end
+
+  resource :cart, only: %i[show], controller: "cart" do
+    delete ":product_id", to: "cart#destroy", as: :remove_item
+  end
+
+  resources :orders, only: %i[index show]
 
   namespace :webhooks do
-    post 'stripe', to: 'stripe#create'
+    post "stripe", to: "stripe#create"
   end
 
-resources :checkout do 
-  collection do
-    post "create"
-    get "success"
-    get "cancel"
+  resources :checkout, only: [] do
+    collection do
+      post "create"
+      get "success"
+      get "cancel"
+    end
   end
-end
 
-post "products/add_to_cart/:id", to: "products#add_to_cart", as: :add_to_cart
+  get "/about", to: "home#about", as: :about
+  get "/privacy", to: "home#privacy", as: :privacy
+  get "/terms", to: "home#terms", as: :terms
 
-get "/about", to: "home#about", as: :about
-
-  
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get "/robots.txt", to: "sitemaps#robots"
+  get "/sitemap.xml", to: "sitemaps#sitemap"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

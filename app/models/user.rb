@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE), not null
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :citext
@@ -27,9 +28,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :orders
+
   def full_name
     "#{first_name} #{last_name}"
-  end        
+  end
   
   def stripe_customer
     return create_strip_customer unless stripe_customer_id.present?

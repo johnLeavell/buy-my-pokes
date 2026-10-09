@@ -19,22 +19,22 @@
 
 /* *media  */
 .hero-section {
-    background: url('./assets/pokemon_banner.jpeg') no-repeat center center;
+    background: linear-gradient(135deg, #212529 0%, #343a40 60%, #1a1d20 100%);
     background-size: cover;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   /* Style the hero image within the section */
   .hero {
     max-width: 100%;
     height: auto;
   }
-  
 
-CSS.mb-6 {
+
+.mb-6 {
     margin-bottom: 4.5rem !important;
   }
   .mb-7 {

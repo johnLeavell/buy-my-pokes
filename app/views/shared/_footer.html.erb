@@ -1,0 +1,11 @@
+<footer class="bg-dark text-white-50 mt-5 py-4">
+  <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+    <span>&copy; <%= Date.current.year %> Buy My Pokes. All rights reserved.</span>
+    <nav class="d-flex gap-3">
+      <%= link_to "About", about_path, class: "link-light text-decoration-none" %>
+      <%= link_to "Privacy Policy", privacy_path, class: "link-light text-decoration-none" %>
+      <%= link_to "Terms & Conditions", terms_path, class: "link-light text-decoration-none" %>
+      <a href="mailto:orders@example.com" class="link-light text-decoration-none">Contact</a>
+    </nav>
+  </div>
+</footer>

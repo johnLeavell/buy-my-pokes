@@ -1,0 +1,31 @@
+<div id="cookie-consent-banner" class="d-none position-fixed bottom-0 start-0 end-0 bg-dark text-white p-3" style="z-index: 1050;">
+  <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+    <span class="small">
+      We use cookies that are essential for signing in and remembering your cart. Analytics cookies, if
+      enabled, help us understand site usage. See our <%= link_to "Privacy Policy", privacy_path, class: "link-warning" %>.
+    </span>
+    <button id="cookie-consent-accept" type="button" class="btn btn-warning btn-sm text-nowrap">Got it</button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    try {
+      var KEY = "cookie_consent_acknowledged";
+      var banner = document.getElementById("cookie-consent-banner");
+      var acceptButton = document.getElementById("cookie-consent-accept");
+      if (!banner || !acceptButton) return;
+
+      if (!window.localStorage.getItem(KEY)) {
+        banner.classList.remove("d-none");
+      }
+
+      acceptButton.addEventListener("click", function () {
+        try { window.localStorage.setItem(KEY, "true"); } catch (e) {}
+        banner.classList.add("d-none");
+      });
+    } catch (e) {
+      // If localStorage is unavailable (e.g. blocked), don't show a banner that can never be dismissed.
+    }
+  })();
+</script>

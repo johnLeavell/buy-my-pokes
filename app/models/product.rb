@@ -13,17 +13,15 @@
 #  stripe_product_id :string
 #
 class Product < ApplicationRecord
+    has_many :order_items
+
     validates :name, presence: true
     validates :price, numericality: { greater_than: 0, less_than: 1000000 }
+    validates :currency, inclusion: { in: %w[usd eur pln uah] }
 
     def to_s
         name
     end
-    
+
     monetize :price, as: :price_cents
-
-    # i need to make a shopping cart that will add the items to the cart and then checkout,
-    # i need to make a checkout page that will show the items in the cart and then allow the user to checkout
-    # i need to make a checkout page that will allow the user to checkout and then pay for the items
-
 end

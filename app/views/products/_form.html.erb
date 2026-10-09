@@ -13,17 +13,17 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :currency %>
-    <%= form.select :currency, ["usd", "eur", "pln", "uah"] %>
+    <%= form.select :currency, ["usd", "eur", "pln", "uah"], {}, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
+    <%= form.label :price, "Price (in cents, e.g. 1999 = $19.99)" %>
+    <%= form.number_field :price, required: true, min: 1, max: 999_999 %>
   </div>
 
   <div class="actions">

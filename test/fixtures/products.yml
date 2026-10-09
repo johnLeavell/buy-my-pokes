@@ -13,16 +13,12 @@
 #  stripe_product_id :string
 #
 
-one:
-  name: MyString
-  price: 1
-  stripe_product_id: MyString
-  stripe_price_id: MyString
-  currency: MyString
+charizard:
+  name: Charizard
+  price: 45000
+  currency: usd
 
-two:
-  name: MyString
-  price: 1
-  stripe_product_id: MyString
-  stripe_price_id: MyString
-  currency: MyString
+pikachu:
+  name: Pikachu
+  price: 2500
+  currency: usd
